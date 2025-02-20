@@ -9,6 +9,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -41,8 +42,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ExpanderSaveHoistTheme {
-                Surface (color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
+
+            ExpanderSaveHoistTheme () {
+                Surface (
+                    color = MaterialTheme.colorScheme.background,
+                    modifier = Modifier.fillMaxSize())
+                {
                     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                         ExpanderPreview(
                             modifier = Modifier.padding(innerPadding)
@@ -86,7 +91,7 @@ fun ExpanderBox(text : String){
     Box (Modifier.padding(vertical = 5.dp, horizontal = 5.dp)) {
         Row (
             Modifier
-                .background(Color.Blue)
+                .background(MaterialTheme.colorScheme.primary)
                 .fillMaxWidth()
                 .padding(10.dp),
         ) {
@@ -94,7 +99,8 @@ fun ExpanderBox(text : String){
                 Text(
 
                     modifier = Modifier.padding(bottom = extraPadding.coerceAtLeast(0.dp)),
-                    text = text, style = MaterialTheme.typography.headlineMedium
+                    text = text, style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
             ElevatedButton(
